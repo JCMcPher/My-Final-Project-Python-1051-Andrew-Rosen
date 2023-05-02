@@ -1,0 +1,417 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// This program was made in C
+// Thank you to priojeet priyom at https://stackoverflow.com/questions/56234786/how-to-read-a-line-using-scanf-in-c
+// The video will be posted to   https://www.youtube.com/@chrono3841  
+
+
+int pop;
+int month;
+int year;
+int day;
+int i;
+int specmonth;
+int specYear;
+int oga;
+int h;
+int d;
+int m;
+int y;
+int n;
+int monthy;
+int ynyn;
+
+
+char months[80];
+
+void read_line(char str[], int n){
+
+    char c;
+    int len=0;
+
+    while(scanf("%c", &c)==1 && len < n-1) { //==1 is to ensure you have not reached end of file(EOF)
+        if(c== '\n')
+            break;
+        str[len++]=c;
+    }
+    str[len] = '\0'; //to mark end of the string.
+}
+
+
+char filetime(int month, int day, int year, int pop){
+    
+    
+    FILE *inp;
+    FILE *oup;
+    char text[20];
+    char filetext[80];
+    char filelist[15][80];
+    printf("debug #2\n");
+    printf("Enter the filename: ");
+    printf("debug #3\n");
+    // gets fgets
+    // fgets(text, 80, stdin);
+    //read_line(text, 20);
+    scanf("%s", text);
+    read_line(text, 20);
+    printf("debug #4\n");
+    inp=fopen(text, "w");
+    printf("debug #5\n");
+    printf("What would you like to type in this file:  ");
+    fprintf(inp, "%d/%d/%d", month, day , year);
+    
+    //read_line(filetext, 80);
+    scanf("%s", filetext);
+    
+    read_line(filetext, 80);
+    fprintf(inp,"%s", filetext);
+    fclose(inp);
+    filelist[pop][80]=text;
+    
+    
+}
+
+int monthconverter(int month){
+    
+    
+    if (month==1){
+        specmonth=13;
+    }
+    if (month==2){
+        specmonth=14;
+    }
+    if (month==3){
+        specmonth=3;
+    }
+    if (month==4){
+        specmonth=4;
+    }
+    if (month==5){
+        specmonth=5;
+    }
+    if (month==6){
+        specmonth=6;
+    }
+    if (month==7){
+        specmonth=7;
+    }
+    if (month==8){
+        specmonth=8;
+    }
+    if (month==9){
+        specmonth=9;
+    }
+    if (month==10){
+        specmonth=10;
+    }
+    if (month==11){
+        specmonth=11;
+    }
+    if (month==12){
+        specmonth=12;
+    }
+    
+    return specmonth;
+        }
+        
+int dayconverter(int month,int year){
+    if (month==1){
+        day=31;}
+    if (month==2){
+        if (0==year%4 && year%100 > 0){
+            day=29;}
+        else if (0== year%400){
+            day = 29;}
+        else{
+            day=28;}}
+    if (month==3){
+        day=31;}
+    if (month==4){
+        day=30;}
+    if (month==5){
+        day=31;}
+    if (month==6){
+        day=30;}
+    if (month==7){
+        day=31;}
+    if (month==8){
+        day=31;}
+    if (month==9){
+        day=30;}
+    if (month==10){
+        day=31;}
+    if (month==11){
+        day=30;}
+    if (month==12){
+        day=31;}
+    return day;}
+
+
+
+
+void conject(int month1, int day1, int year1 ){
+    
+    int h;
+    
+    if (month1==13 || month1==14){
+        year1= year1-1;
+    }
+    else{
+        year1= year1;
+    }
+    
+    
+    h= ((day1 + ((13*(month1+1))/5) +year1%100 + ((year1%100)/4) + ((year1/100)/4) - 2*(year1/100))%7);
+    
+    printf("h = %d  ", h);
+    
+    if(h<0){
+        h=h+7;
+    }
+    
+    if(h==0){
+        printf("Saturday ");
+    }
+    if(h==1){
+        printf("Sunday ");
+    } 
+    if(h==2){
+        printf("Monday ");
+    }
+    if(h==3){
+        printf("Tuesday ");
+    }
+    if(h==4){
+        printf("Wednesday ");
+    }
+    if(h==5){
+        printf("Thursday ");
+    }
+    if(h==6){
+        printf("Friday ");
+    }
+    
+    if (month1==13){
+        printf("January ");
+    }
+    if (month1==14){
+        printf("Febuary ");
+    }
+    if (month1==3){
+        printf("March ");
+    }
+    if (month1==4){
+        printf("April ");
+    }
+    if (month1==5){
+        printf("May ");
+    }
+    if (month1==6){
+        printf("June ");
+    }
+    if (month1==7){
+        printf("July ");
+    }
+    if (month1==8){
+        printf("August ");
+    }
+    if (month1==9){
+        printf("September ");
+    }
+    if (month1==10){
+        printf("October ");
+    }
+    if (month1==11){
+        printf("November ");
+    }
+    if (month1==12){
+        printf("December ");
+    }
+    printf("%d", day1);
+    if(month1==13 || month1==14){
+        year1= year1+1;
+    }
+    printf(", %d ", year1);
+    
+    
+    
+}
+
+
+
+
+
+int main(int h, int day, int specmonth){
+    
+    // This Part need some serious editing the code 9/10 works but there are two problems. Problem 1 is that the code is very jumbeld and needs some fixing.
+    // Problem #2 is that I have yet to creat a file reading reading function.
+    pop=0;
+    int yn;
+    printf("Hello I am the enternal perpetual Calendar, the farthest im allowed to go back is October 15, 1582.\n");
+    printf("However I can go anywhere in the future to help you set reminders for events\n");
+    printf("Enter a year to get us started. Enter (-1) for year if you want to exit this program.      ");
+    scanf("%d", &year);
+    
+    while (year!= -1){
+        if (year<1582){
+            printf("\nThe farthest I can go back is October 15, 1582. Enter (-1) for year if you want to exit this program.    ");
+            scanf("%d", &year);}
+        else if (year==1582){
+            printf("Would you like to view everyday in this year starting from 10/15/1582?    1=Yes, Anything Else=No:  ");
+            scanf("%d", &yn);
+            if(yn==1){
+                month=10;
+                m=monthconverter(month);
+                d=dayconverter(month,year);
+                for(n=15; n<d+1; n++){
+                    conject(m,n,year);
+                    printf("\n");
+                }
+                month=11;
+                m=monthconverter(month);
+                d=dayconverter(month,year);
+                for(n=1; n<d+1; n++){
+                    conject(m,n,year);
+                    printf("\n");}
+                month=12;
+                m=monthconverter(month);
+                d=dayconverter(month,year);
+                for(n=1; n<d+1; n++){
+                    conject(m,n,year);
+                    printf("\n");}
+                printf("Would you like to see a specific month?     1=Yes ,Anything Else=Break:  ");
+                scanf("%d", &ynyn);
+                if(ynyn==1){
+                    printf("\nEnter the month:   ");
+                    scanf("%d", &month);
+                    while(month<10){
+                    printf("Not a valid month. Try again:  ");
+                    scanf("%d", &month);}}
+                if(month==10){
+                    m=monthconverter(month);
+                    d=dayconverter(month,year);
+                    for(n=15; n<d+1; n++){
+                        conject(m,n,year);
+                        printf("\n");
+                    }
+                }
+                else if(month>10 && month<=12){
+                    m=monthconverter(month);
+                    d=dayconverter(month,year);
+                    for(n=1; n<d+1; n++){
+                        conject(m,n,year);
+                        printf("\n");
+                    
+                }
+                    
+                }
+                    
+                }
+            
+            else{
+                printf("\nEnter the month:   ");
+                scanf("%d", &month);
+                while(month<10){
+                    printf("Not a valid month. Try again:  ");
+                    scanf("%d", &month);
+                }
+                if(month==10){
+                    m=monthconverter(month);
+                    d=dayconverter(month,year);
+                    for(n=15; n<d+1; n++){
+                        conject(m,n,year);
+                        printf("\n");
+                    }
+                }
+                else if(month>10 && month<=12){
+                    m=monthconverter(month);
+                    d=dayconverter(month,year);
+                    for(n=1; n<d+1; n++){
+                        conject(m,n,year);
+                        printf("\n");
+                    
+                }
+                }
+                else{
+                    printf(" Enter a real month please. ");
+                    scanf("%d", &month);
+                }
+            }
+        }
+            
+            
+        
+        else{ 
+            printf("\nNow it is time to select a month. Would you like to view all months within the year? (1=Yes 0= No). Enter anything else if you want to exit this program.      ");
+            scanf("%d", &yn);
+            if (yn==1){
+                
+                for(i=1;i<13;i++){
+                    month=i;
+                    d=dayconverter(i, year);
+                    m=monthconverter(i);
+                    for (n=1; n<d+1; n++){
+                        conject(m,n,year);
+                        printf("\n");
+                    
+                    
+                    }   
+                }
+            
+             printf("Go again?  ");
+             scanf("%d", &yn);
+            }
+            else if(yn==0){
+                printf(" Enter the month:  ");
+                
+                scanf("%d", &monthy);
+                while(monthy<1 || monthy>12){
+                    printf("Enter a real month please: ");
+                    scanf("%d", &monthy);
+                }
+                d=dayconverter(monthy, year);
+                m=monthconverter(monthy);
+                for (n=1; n<d+1; n++){
+                        conject(m,n,year);
+                        printf("\n");
+                }
+                printf("Is there a specific day you would like to see? 1=Yes 0=No:  ");
+                scanf("%d", &ynyn);
+                if(ynyn==1){
+                    
+                    printf("Enter the day: ");
+                    scanf("%d", &n);
+                    while(n>d){
+                        printf("\nThats not a valid day. Try again.   ");
+                        scanf("%d", &n);}
+                        
+                    conject(m,n,year);
+                    
+                    printf("Time to Enter an event");
+                    printf("debug #1\n");
+                    filetime(m,n,year,pop);
+                    pop++;
+                    //This next part is only a temporary fix
+                    
+                    
+                }
+                else{
+                    break;
+                }
+                
+
+            }
+            else{
+                break;
+            }
+            
+        }
+    printf("Enter a year to get us started again. Enter (-1) for year if you want to exit this program.      ");
+    scanf("%d", &year);
+    }
+    
+}
+    
